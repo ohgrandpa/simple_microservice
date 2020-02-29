@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    Product selector
+  <div class="nav-item dropdown" style="position:absolute;right:0px">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+      {{current_customer.first_name}} {{current_customer.last_name}}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown" align="right">
+        {% for customer in customers %}
+          <a class="dropdown-item" href="#" name="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}</a>
+        {% endfor %}
+    </div>
+  </div>
+</nav>
+{% for product in products %}
+    <img src="/static/images/{{product.name}}.png" height="200" width="200" name="{{product.id}}"/>
+{% endfor %}
+<script>$("img").click(toggle_border);$(".dropdown-item").click(switch_customers);</script>
+Quantity: <input type="text" id="quantity"/>
+<button onclick="add_to_basket()">Add to basket</button>
+<table id="basket"></table>
+Total: <span id="total"></span>
+{% endblock %}
